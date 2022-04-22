@@ -1,5 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:online_shop_app/constants.dart';
+import 'package:online_shop_app/details/product_title_with_image.dart';
 import 'package:online_shop_app/models/products.dart';
+
+import 'add_to_cart.dart';
+import 'cart_counter.dart';
+import 'colors_and_size.dart';
+import 'counter_with_fav_button.dart';
+import 'description.dart';
 
 class DetailsScreenBody extends StatelessWidget {
   final Product product;
@@ -18,8 +28,14 @@ class DetailsScreenBody extends StatelessWidget {
           left: 0,
           right: 0,
           child: Container(
+            margin: EdgeInsets.only(top: size.height * 0.3),
+            padding: EdgeInsets.only(
+              top: size.height * 0.12,
+              left: 20,
+              right: 20,
+            ),
             alignment: Alignment.center,
-            height: 300,
+            height: 465,
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -27,33 +43,22 @@ class DetailsScreenBody extends StatelessWidget {
                 topRight: Radius.circular(25),
               ),
             ),
+            child: Column(
+              children: [
+                ColorAndSize(product: product),
+                const SizedBox(height: 10),
+                Descriptions(product: product),
+                const CounterWithFavButton(),
+                const SizedBox(height: 10),
+                AddToCart(product: product),
+              ],
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              const Text(
-                "Aristocratic Hand Bag",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                product.title,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-              ),
-              Row(
-                children: [],
-              ),
-            ],
-          ),
-        ),
+        ProfuctTitleWithImage(product: product),
       ],
     );
   }
 }
+
+
